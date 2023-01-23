@@ -1,25 +1,22 @@
-import { config as dotenv } from 'dotenv' 
+import { config as dotenv } from 'dotenv'
 dotenv({ path: `.env` })
 
 import discord from 'discord.js'
 const { Client, GatewayIntentBits } = discord
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds
-  ]
-});
+  intents: [GatewayIntentBits.Guilds],
+})
 
-client.once("ready", () => {
+client.once('ready', () => {
   console.log(`bot is online`)
 })
 
-client.on("message", async (message) => {
+client.on('message', async (message) => {
   console.log(message)
-  if (message.content === "ping") {
-    message.reply("pong");
+  if (message.content === 'ping') {
+    message.reply('pong')
   }
 })
 
 client.login(process.env.TOKEN)
-

@@ -5,7 +5,8 @@
   "type": "module",
   "main": "bot.js",
   "scripts": {
-    "bot": "node src/bot.js"
+    "bot": "node src/bot.js",
+    "lint": "eslint 'src/*.js' --quiet --fix"
   },
   "keywords": [],
   "author": "",
