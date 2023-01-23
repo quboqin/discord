@@ -4,6 +4,9 @@ dotenv({ path: `.env` })
 import discord from 'discord.js'
 const { Client, GatewayIntentBits } = discord
 
+import fs from 'fs'
+import fetch from 'node-fetch'
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -26,6 +29,15 @@ client.on('messageCreate', async (message) => {
   console.log(message.content)
   if (message.content === 'ping') {
     message.reply('pong')
+  }
+  const attachment = message.attachments.first()
+  if (attachment && /\.(png|jpe?g|svg)$/.test(attachment.url)) {
+    console.log(attachment.url)
+    fetch(attachment.url)
+      .then((res) => res.buffer())
+      .then((buffer) => {
+        fs.writeFileSync(`./output/${attachment.name}`, buffer)
+      })
   }
 })
 
