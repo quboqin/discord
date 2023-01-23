@@ -34,7 +34,7 @@ client.on('messageCreate', async (message) => {
   if (attachment && /\.(png|jpe?g|svg)$/.test(attachment.url)) {
     console.log(attachment.url)
     fetch(attachment.url)
-      .then((res) => res.buffer())
+      .then((res) => res.arrayBuffer())
       .then((buffer) => {
         fs.writeFileSync(`./output/${attachment.name}`, buffer)
       })
